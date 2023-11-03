@@ -3,8 +3,8 @@ env:
     rcloneconfig: "ENCRYPTED[!6950207180a7126c8209edff681e77b1722355e133491f24e408aeecb77c032e3a0bdec3d2a08859e65a863431211825!]"
     tokentl: "ENCRYPTED[!aa090cd88b75f559eddb2b8689aa1fba21dd8ee8b5f6e5388de3ba9cd4e8fd5a67e2e9015a819f36b8db5672365545d3!]"
     idtl: "ENCRYPTED[!b6b3b60e83872912ded9c29c2c68df7deb43db4ce875d86acfc71586b0bd53393092525dcbf74972de4995fadb87e5f2!]"
-    lunch: lunch blaze_citrus-userdebug
-    make: make bacon
+    lunch: lunch cherish_citrus-userdebug
+    make: mka bacon
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
@@ -23,7 +23,7 @@ task:
        - echo "$credentials" > ~/.git-credentials
        - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
-       - rclone copy fk09:blaze/ccache.tar.gz ~/ -P
+       - rclone copy fk09:cher/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -38,7 +38,7 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/ProjectBlaze/manifest.git -b 13 -g default,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/CherishOS/android_manifest -b tiramisu -g default,-mips,-darwin,-notdefault
       - git clone --depth 1 https://github.com/Night-Raids-Reborn/local_manifest -b 13-n .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8 && repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
@@ -51,18 +51,18 @@ task:
 #      - export WITH_GAPPS=true
       - sudo ln -sf /usr/share/zoneinfo/Asia/Jakarta /etc/localtime
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build Started!"
-#      - ./collect.sh
-      - ./final.sh
+      - ./collect.sh
+#      - ./final.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/ysl/ && ls blaze-*.zip) Completed!"
 
   Upload_script:
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/citrus/ && ls ProjectBlaze-*.zip)"
-      - rclone copy ~/rom/out/target/product/citrus/ProjectBlaze-*.zip fk09:citrus -P
-      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/citrus/ && ls ProjectBlaze-*.zip) Uploaded Successfully!"
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/citrus/ && ls *.zip)"
+#      - rclone copy ~/rom/out/target/product/citrus/Cherish-OS-*.zip fk09:citrus -P
+      - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/citrus/ && ls *.zip) Uploaded Successfully!"
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
       - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz fk09:blaze -P
+      - rclone copy ccache.tar.gz fk09:cher -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Successfully!"
 
