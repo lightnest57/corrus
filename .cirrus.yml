@@ -23,8 +23,8 @@ task:
        - echo "$credentials" > ~/.git-credentials
        - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
-       - rclone copy fk09:evou/ccache.tar.gz ~/ -P
        - cd ~/
+       - wget -O ccache.tar.gz https://pikabot.me/0:/evox14ccache.tar.gz
        - time tar xf ccache.tar.gz
        - cd ~/
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
