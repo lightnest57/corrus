@@ -12,7 +12,7 @@ task:
   persistent_worker:
     isolation:
       container:
-        image: apon77/aosp:cirrus
+        image: debian:latest
         cpu: 2
         memory: 4G 
 task:
@@ -21,7 +21,7 @@ task:
   persistent_worker:
     isolation:
       container:
-        image: apon77/aosp:cirrus
+        image: debian:latest
         cpu: 24
         memory: 120G
 
