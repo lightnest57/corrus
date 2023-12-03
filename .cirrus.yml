@@ -9,7 +9,7 @@ env:
 persistent_worker:
   isolation:
     container:
-      image: lightnest57/darknius:latest
+      image: debian:latest
       cpu: 24
       memory: 128G
       volumes:
