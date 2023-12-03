@@ -6,24 +6,18 @@ env:
     lunch: lunch evolution_citrus-userdebug
     make: mka evolution
     
+persistent_worker:
+  isolation:
+    container:
+      image: lightnest57/darknius:latest
+      cpu: 24
+      memory: 128G
+      volumes:
+        - /home/root:/home/root
+        - /tmp/ccache:/tmp/ccache
+        - /tmp/rom:/tmp/rom
+        - /:/
 task:
-  name: Test
-  timeout_in: 2m
-  persistent_worker:
-    isolation:
-      container:
-        image: debian:latest
-        cpu: 2
-        memory: 4G 
-task:
-  name: Build
-  timeout_in: 4h
-  persistent_worker:
-    isolation:
-      container:
-        image: debian:latest
-        cpu: 24
-        memory: 120G
 
   Build-Env-Setup_background_script:
        - sudo apt-get update && sudo apt-get -y install apt-transport-https ca-certificates
