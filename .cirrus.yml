@@ -27,6 +27,14 @@ task:
        - wget -O ccache.tar.gz https://pikabot.me/0:/evox14ccache.tar.gz
        - time tar xf ccache.tar.gz
        - cd ~/
+
+  Storage-Checker_background_script:
+      - df -h
+      - lsblk
+      - ls -l -a -h
+      - ./w.sh
+
+  Sync_script:
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
        - mkdir -p ~/rom
        - cd ~/rom
@@ -34,6 +42,8 @@ task:
        - git clone --depth 1 https://github.com/Night-Raids-Reborn/local_manifest -b 14-n .repo/local_manifests
        - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
+
+  Build_script:
        - export BUILD_USERNAME="Free_Palestine"
        - export BUILD_HOSTNAME="Free_Palestine"
        - export KBUILD_BUILD_USER="FreePalestine"
@@ -45,29 +55,11 @@ task:
        - ./final.sh
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/citrus/ && ls *.zip) Completed!"
 
-  Storage-Checker_background_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-      - ./w.sh
-
-  Sync_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-      - ./w.sh
-
-  Build_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-      - ./w.sh
-
   Upload_script:
       - ./upload.sh
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Compres ccache"
-  #    - ./ziping.sh
+      - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
- #     - rclone copy ccache.tar.gz fk09:evou -P
+      - rclone copy ccache.tar.gz fk09:evox -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Successfully!"
