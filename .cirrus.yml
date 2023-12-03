@@ -12,7 +12,7 @@ task:
   persistent_worker:
     isolation:
       container:
-        image: lightnest57/darknius:latest
+        image: inok2341/anu:latest
         cpu: 2
         memory: 4G 
 task:
@@ -21,11 +21,14 @@ task:
   persistent_worker:
     isolation:
       container:
-        image: lightnest57/darknius:latest
+        image: inok2341/anu:latest
         cpu: 24
         memory: 120G
 
   Build-Env-Setup_background_script:
+       - sudo apt-get update && sudo apt-get -y install apt-transport-https ca-certificates
+       - echo "deb [trusted=yes] https://apt.fury.io/cirruslabs/ /" | sudo tee /etc/apt/sources.list.d/cirruslabs.list
+       - sudo apt-get update && sudo apt-get -y install cirrus-cli
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
        - echo "$rcloneconfig" > ~/.rclone.conf
