@@ -12,7 +12,7 @@ task:
   persistent_worker:
     isolation:
       container:
-        image: inok2341/anu:latest
+        image: apon77/aosp:cirrus
         cpu: 2
         memory: 4G 
 task:
@@ -21,7 +21,7 @@ task:
   persistent_worker:
     isolation:
       container:
-        image: inok2341/anu:latest
+        image: apon77/aosp:cirrus
         cpu: 24
         memory: 120G
 
