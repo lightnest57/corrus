@@ -15,8 +15,10 @@ task:
         image: lightnest57/darknius:latest
         cpu: 2
         memory: 4G 
-
-persistent_worker:
+task:
+  name: Build
+  timeout_in: 4h
+  persistent_worker:
     isolation:
       container:
         image: lightnest57/darknius:latest
