@@ -14,13 +14,7 @@ task:
       container:
         image: lightnest57/darknius:latest
         cpu: 2
-        memory: 4G
-        
-  Checker_background_script:
-      - df -h
-      - lsblk
-      - ls -l -a -h
-      - ./w.sh   
+        memory: 4G 
 
 persistent_worker:
     isolation:
