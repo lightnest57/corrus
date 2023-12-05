@@ -15,9 +15,6 @@ task:
       memory: 32G
       
   Build-Env-Setup_background_script:
-       - sudo apt-get update && sudo apt-get -y install apt-transport-https ca-certificates
-       - echo "deb [trusted=yes] https://apt.fury.io/cirruslabs/ /" | sudo tee /etc/apt/sources.list.d/cirruslabs.list
-       - sudo apt-get update && sudo apt-get -y install cirrus-cli
        - export DEBIAN_FRONTEND=noninteractive
        - mkdir -p ~/.config/rclone
        - echo "$rcloneconfig" > ~/.rclone.conf
@@ -41,7 +38,7 @@ task:
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
        - mkdir -p ~/rom
        - cd ~/rom
-       - repo init -q --no-repo-verify --depth=1 -u https://github.com/Night-Raids-Reborn/evoxmanifest -b udc -g default,-mips,-darwin,-notdefault
+       - repo init -q --no-repo-verify --depth=1 -u https://github.com/Night-Raids-Reborn/evoumanifest -b udc -g default,-mips,-darwin,-notdefault
        - git clone --depth 1 https://github.com/Night-Raids-Reborn/local_manifest -b 14-n .repo/local_manifests
        - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
        - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
