@@ -24,7 +24,7 @@ task:
        - git config --global credential.helper store --file=~/.git-credentials
        - mkdir -p ~/ccache
        - cd ~/
-       - wget -O ccache.tar.gz https://pixeldrain.com/api/file/E6CQ5SES?download
+       - rclone copy fk09:blazeu/ccache.tar.gz ~/ -P
        - time tar xf ccache.tar.gz
        - cd ~/
 
