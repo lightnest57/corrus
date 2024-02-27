@@ -44,7 +44,7 @@ task:
       - export PATH="~/.anu:$PATH"
       - curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/.anu/repoo
       - chmod a+x ~/.anu/repoo
-      - git clone https://gerrit.googlesource.com/git-repo .repo/repoo
+      - git clone https://gerrit.googlesource.com/git-repo .repo/repo
       - repoo init -q --no-repo-verify --depth=1 -u https://github.com/LineageOS/android -b lineage-21.0 --git-lfs -g default,-mips,-darwin,-notdefault
       - git clone --depth 1 https://github.com/Night-Raids-Reborn/local_manifest -b u .repo/local_manifests
       - repoo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
