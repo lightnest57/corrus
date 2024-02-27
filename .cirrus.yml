@@ -39,9 +39,15 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/LineageOS/android -b lineage-21.0 -g default,-mips,-darwin,-notdefault
+      - rm -rf * .repo
+      - mkdir -p ~/.anu
+      - export PATH="~/.anu:$PATH"
+      - curl http://commondatastorage.googleapis.com/git-repo-downloads/repo > ~/.anu/repoo
+      - chmod a+x ~/.anu/repoo
+      - git clone https://gerrit.googlesource.com/git-repo .repo/repoo
+      - repoo init -q --no-repo-verify --depth=1 -u https://github.com/LineageOS/android -b lineage-21.0 --git-lfs -g default,-mips,-darwin,-notdefault
       - git clone --depth 1 https://github.com/Night-Raids-Reborn/local_manifest -b u .repo/local_manifests
-      - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+      - repoo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
