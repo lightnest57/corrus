@@ -3,7 +3,8 @@ env:
     rcloneconfig: "ENCRYPTED[!1c035c963defcbd54bec6e1b76c6e717d08ace72217fa4439318abf03cec5d2d161b7499f0f5dd45f565618ec5dbf1ff!]"
     tokentl: "ENCRYPTED[!71f4af2e1561bb7eadaacec8996e43f7d6650492b2dfd3ce12058e43b40ffddbf2f317f15959e8a611b377fcdb44921b!]"
     idtl: "ENCRYPTED[!d387faacf1a99eb9e5ea8b63c3d1c949a24a852d61b38ba5dba62db7e7b13248e7f56fdd44e6ec3d60865789afc75439!]"
-    make: ./rom-build.sh
+    lunch: lunch evolution_citrus-userdebug
+    make: mka evolution
 
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
@@ -23,7 +24,7 @@ task:
        - git config --global credential.helper store --file=~/.git-credentials
        - rm -rf ~/ccache
        - mkdir -p ~/ccache
-       - rclone copy fk09:topaz/ccache.tar.gz ~/ -P
+       - rclone copy fk09:evox/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -38,9 +39,11 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init --depth=1 --no-repo-verify -u https://github.com/AOSPA/manifest -b topaz -g default,-mips,-darwin,-notdefault
-      - git clone https://github.com/Night-Raids-Reborn/local_manifest --depth 1 -b 13-topaz .repo/local_manifests
+      - repo init --depth=1 --no-repo-verify -u https://github.com/Evolution-X/manifest -b udc -g default,-mips,-darwin,-notdefault
+      - git clone https://github.com/Night-Raids-Reborn/local_manifest --depth 1 -b usop .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
+      - rm -rf hardware/samsung-ext/interfaces
+      - git clone https://github.com/Roynas-Android-Playground/hardware_samsung-extra_interfaces -b master hardware/samsung-ext/interfaces
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
 
   Build_script:
@@ -61,6 +64,6 @@ task:
       - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz fk09:topaz -P
+      - rclone copy ccache.tar.gz fk09:evox -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Successfully!"
       

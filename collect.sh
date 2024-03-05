@@ -8,8 +8,9 @@ export USE_CCACHE=1
 ccache -M 100G -F 0
 ccache -o compression=true
 ccache -z
-bash rom-build.sh citrus -t userdebug
-sleep 95m
+$lunch
+$make -j8 &
+sleep 90m
 kill %1
 ccache -s
 
