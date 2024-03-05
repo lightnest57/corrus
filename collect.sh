@@ -1,6 +1,7 @@
 #!/bin/bash
 cd ~/rom
 
+. build/envsetup.sh
 export TZ=Asia/Jakarta
 export CCACHE_DIR=~/ccache
 export CCACHE_EXEC=$(which ccache)
