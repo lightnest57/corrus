@@ -11,5 +11,5 @@ ccache -o compression=true
 ccache -z
 
 $lunch
-make sepolicy
+make sepolicy -j8
 

@@ -10,7 +10,7 @@ task:
   name: "Setting Up, Syncing, Building and Uploading..."
   timeout_in: 480m
   container:
-      image: inok2341/anu:latest
+      image: ohmyvenyx/idn-labs:latest
       cpu: 8
       memory: 32G
 
@@ -36,10 +36,11 @@ task:
       - ./w.sh
 
   Sync_script:
+      - sudo apt-get update && sudo apt-get install -y git-lfs && git lfs install
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init --depth=1 --no-repo-verify -u https://github.com/PixelOS-AOSP/manifest.git -b fourteen -g default,-mips,-darwin,-notdefault
+      - repo init --depth=1 --no-repo-verify -u https://github.com/PixelOS-AOSP/manifest.git -b fourteen  --git-lfs -g default,-mips,-darwin,-notdefault
       - git clone https://github.com/Night-Raids-Reborn/local_manifest --depth 1 -b u .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - rm -rf hardware/xiaomi
