@@ -3,7 +3,7 @@ env:
     rcloneconfig: "ENCRYPTED[!a82876998eb562d0a23e899f4ad0407122a2ed3885cf87966bef119b1c49e20a9c7bcf4660a0333367c3597afe4d25f8!]"
     tokentl: "ENCRYPTED[!5487857f6bde4d673a04119d51f02abef221c90acf20e97c7b626cc3b411b7976f1c5075c74ee091aade97e41fe7d16e!]"
     idtl: "ENCRYPTED[!d387faacf1a99eb9e5ea8b63c3d1c949a24a852d61b38ba5dba62db7e7b13248e7f56fdd44e6ec3d60865789afc75439!]"
-    make : brunch
+    make : brunch mido
     
 task:
   name: "Setting Up, Syncing, Building and Uploading..."
