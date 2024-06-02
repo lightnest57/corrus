@@ -9,6 +9,7 @@ export USE_CCACHE=1
 ccache -M 100G -F 0
 ccache -o compression=true
 ccache -z
+$lunch
 $make &
 sleep 100m
 kill %1
