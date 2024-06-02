@@ -23,7 +23,7 @@ task:
        - git config --global credential.helper store --file=~/.git-credentials
        - rm -rf ~/ccache
        - mkdir -p ~/ccache
-       - rclone copy cirrus:havoc9/ccache.tar.gz ~/ -P
+       - rclone copy cirrus:rr9/ccache.tar.gz ~/ -P
        - cd ~/
        - time tar xf ccache.tar.gz
        - cd ~/
@@ -38,7 +38,7 @@ task:
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Start sync Source"
       - mkdir -p ~/rom
       - cd ~/rom
-      - repo init -q --no-repo-verify --depth=1 -u https://github.com/Night-Raids-Reborn/havoc_manifest -b pie -g default,-mips,-darwin,-notdefault
+      - repo init -q --no-repo-verify --depth=1 -u https://github.com/ResurrectionRemix/platform_manifest -b pie -g default,-mips,-darwin,-notdefault
       - git clone https://github.com/Night-Raids-Reborn/local_manifest --depth 1 -b mido-9 .repo/local_manifests
       - repo sync -c --no-clone-bundle --no-tags --optimized-fetch --prune --force-sync -j8
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Sync Completed!"
@@ -61,6 +61,6 @@ task:
       - ./ziping.sh
       - cd ~/
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading ccache...."
-      - rclone copy ccache.tar.gz cirrus:havoc9 -P
+      - rclone copy ccache.tar.gz cirrus:rr9 -P
       - curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Ccache Uploaded Successfully!"
 
