@@ -1,5 +1,5 @@
-if [ -f ~/rom/out/target/product/mido/qassa_S*.zip ]; then
-      curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/mido/ && ls qassa_S*.zip)"
-      rclone copy ~/rom/out/target/product/mido/qassa_S*.zip fk09:mido -P
-      curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/mido/ && ls qassa_S*.zip) Uploaded Successfully!"
+if [ -f ~/rom/out/target/product/mido/RR-*.zip ]; then
+      curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Uploading Build $(cd ~/rom/out/target/product/mido/ && ls RR-*.zip)"
+      rclone copy ~/rom/out/target/product/mido/RR-*.zip fm293:mido -P
+      curl -s https://api.telegram.org/$tokentl/sendMessage -d chat_id=$idtl -d text="Build $(cd ~/rom/out/target/product/mido/ && ls RR-*.zip) Uploaded Successfully!"
 fi
